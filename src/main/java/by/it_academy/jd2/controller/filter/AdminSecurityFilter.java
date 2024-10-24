@@ -10,7 +10,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-import static by.it_academy.jd2.controller.StatisticServlet.STATISTIC_JSP;
+
 
 @WebFilter(filterName = "AdminSecurityFilter", urlPatterns = {"/ui/admin/*", "/api/admin/*"})
 public class AdminSecurityFilter implements Filter {
