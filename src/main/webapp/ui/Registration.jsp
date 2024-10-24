@@ -38,5 +38,7 @@
             <c:forEach items="${errors}" var="item">
                 <p style="color:Red;">${item.getMessage()}</p>
             </c:forEach>
+    </c:if>
+
 </body>
 </html>
