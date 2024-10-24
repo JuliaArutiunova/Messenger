@@ -34,7 +34,9 @@
 </form>
 <c:if test="${not empty errors}">
 <h4>Ошибки заполнения формы:</h4>
-<jsp:include page="registrationError.jsp" />
 </c:if>
+            <c:forEach items="${errors}" var="item">
+                <p style="color:Red;">${item.getMessage()}</p>
+            </c:forEach>
 </body>
 </html>
