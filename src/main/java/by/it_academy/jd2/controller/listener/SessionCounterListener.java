@@ -1,7 +1,8 @@
 package by.it_academy.jd2.controller.listener;
 
+import jakarta.servlet.annotation.WebListener;
 import jakarta.servlet.http.*;
-
+@WebListener
 public class SessionCounterListener implements HttpSessionAttributeListener {
 
     private static int sessionCount = 0;
