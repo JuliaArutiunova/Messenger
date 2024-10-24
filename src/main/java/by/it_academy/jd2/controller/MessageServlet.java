@@ -6,6 +6,7 @@ import by.it_academy.jd2.dto.UserDTO;
 import by.it_academy.jd2.service.api.IMessageService;
 import by.it_academy.jd2.service.factory.ServiceFactory;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -15,7 +16,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
+@WebServlet(name = "MessageServlet", urlPatterns = "/api/message")
 public class MessageServlet extends HttpServlet {
     public static final String MESSAGE_JSP = "/template/writeMessage.jsp";
     private static final String TO_PARAMETER = "to";
