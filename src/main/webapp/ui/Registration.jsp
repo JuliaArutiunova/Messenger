@@ -10,7 +10,6 @@
 
 <h2>Регистрация</h2>
 
-<form action="user" , method="POST">
 Имя:<br>
 <input type="text" name="userName" required>
 <br>
@@ -35,6 +34,7 @@
 <c:if test="${not empty errors}">
 <h4>Ошибки заполнения формы:</h4>
 </c:if>
+        <form action="${pageContext.request.contextPath}/api/user", method="POST">
             <c:forEach items="${errors}" var="item">
                 <p style="color:Red;">${item.getMessage()}</p>
             </c:forEach>
