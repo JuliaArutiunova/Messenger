@@ -56,9 +56,12 @@ public class MessageServlet extends HttpServlet {
                     .text(req.getParameter(TEXT_PARAMETER))
                     .time(LocalDateTime.now())
                     .build());
-            resp.getWriter().write("Сообщение для " + to + " успешно отправлено"); //TODO
+            req.setAttribute("report", "Сообщение для " + to + " успешно отправлено");
+            doGet(req, resp);
         } catch (IllegalArgumentException e) {
-            resp.getWriter().write(e.getMessage()); //TODO
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            req.setAttribute("error", e.getMessage());
+            doGet(req, resp);
         }
     }
 }
