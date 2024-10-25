@@ -56,18 +56,6 @@ public class MessageService implements IMessageService {
         return messageDTOS;
     }
 
-    @Override
-    public List<ShowMessageDTO> getOutgoingMessages(String user) { //Исходящие
-        List<ShowMessageDTO> messageDTOS = new ArrayList<>();
-        messageStorage.getMessagesToUser(user)
-                .forEach(messageEntity -> messageDTOS.add(
-                        ShowMessageDTO.builder()
-                                .name(messageEntity.getToUser().getName())
-                                .text(messageEntity.getText())
-                                .time(messageEntity.getSendingTime())
-                                .build()));
-        return messageDTOS;
-    }
 
 
     @Override

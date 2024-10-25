@@ -10,8 +10,6 @@ public interface IMessageService {
 
     List<ShowMessageDTO> getIncomingMessages(String user);
 
-    List<ShowMessageDTO> getOutgoingMessages(String user);
-
     long getMessageCount();
 
 
