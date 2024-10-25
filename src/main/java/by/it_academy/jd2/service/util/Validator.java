@@ -1,17 +1,17 @@
-package by.it_academy.jd2.service.validation;
+package by.it_academy.jd2.service.util;
 
 import by.it_academy.jd2.dto.MessageDTO;
 import by.it_academy.jd2.dto.RegistrationDTO;
 import by.it_academy.jd2.entity.UserEntity;
 import by.it_academy.jd2.service.api.IUserService;
-import by.it_academy.jd2.service.validation.api.IFormValidator;
+import by.it_academy.jd2.storage.api.IUserStorage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FormValidator implements IFormValidator {
     private final IUserService userService;
+public class Validator {
 
     private final LocalDate minimumBirthDate = LocalDate.parse("1900-01-01");
 
