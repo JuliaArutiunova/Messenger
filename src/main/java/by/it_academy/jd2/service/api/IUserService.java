@@ -9,7 +9,6 @@ public interface IUserService {
 
     UserDTO validateUser(String login, String password);
 
-    boolean isExist(String login);
 
     long getUsersCount();
 

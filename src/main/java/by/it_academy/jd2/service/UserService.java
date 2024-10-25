@@ -7,8 +7,7 @@ import by.it_academy.jd2.entity.UserEntity;
 import by.it_academy.jd2.entity.UserRole;
 import by.it_academy.jd2.exception.RegistrationException;
 import by.it_academy.jd2.service.api.IUserService;
-import by.it_academy.jd2.service.validation.FormValidator;
-import by.it_academy.jd2.service.validation.api.IFormValidator;
+import by.it_academy.jd2.service.util.Validator;
 import by.it_academy.jd2.storage.api.IUserStorage;
 
 
@@ -19,11 +18,10 @@ public class UserService implements IUserService {
 
     private final IUserStorage userStorage;
 
-    private final IFormValidator formValidator;
 
     public UserService(IUserStorage userStorage) {
         this.userStorage = userStorage;
-        this.formValidator = new FormValidator(this);
+
 
     }
 
@@ -31,7 +29,7 @@ public class UserService implements IUserService {
     @Override
     public void create(RegistrationDTO registrationDTO) {
 
-        List<Throwable> errors = formValidator.validateRegistration(registrationDTO);
+        List<Throwable> errors = Validator.validateRegistration(registrationDTO, userStorage);
 
         if (!errors.isEmpty()) {
             throw new RegistrationException(errors);
@@ -51,7 +49,7 @@ public class UserService implements IUserService {
     @Override
     public UserDTO validateUser(String login, String password) {
 
-        UserEntity user = formValidator.validateUser(login, password);
+        UserEntity user = Validator.validateUser(login, password, userStorage);
 
         return UserDTO.builder()
                 .name(user.getName())
@@ -60,10 +58,6 @@ public class UserService implements IUserService {
                 .build();
     }
 
-    @Override
-    public boolean isExist(String login) {
-        return userStorage.isExistLogin(login);
-    }
 
     @Override
     public UserEntity getUser(String login) {
