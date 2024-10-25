@@ -15,16 +15,10 @@ import java.io.IOException;
 
 @WebServlet(name = "LogInServlet", urlPatterns = "/api/login")
 public class LogInServlet extends HttpServlet {
-    public static final String LOGIN_JSP_PATH = "/template/login.jsp";
 
     private static final String LOGIN_PARAMETER = "login";
     private static final String PASSWORD_PARAMETER = "psw";
     private final IUserService userService = ServiceFactory.getUserService();
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher(LOGIN_JSP_PATH).forward(req,resp);
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
