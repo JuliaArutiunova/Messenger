@@ -46,16 +46,17 @@ public class RegistrationServlet extends HttpServlet {
                     .birthDate(LocalDate.parse(birthDate))
                     .build());
 
-            UserDTO user = userService.validateUser(login, password);
+            UserDTO user = userService.getUserInfo(login, password);
 
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
             resp.sendRedirect(req.getContextPath() + "/api/message");
 
         } catch (RegistrationException e) {
-            req.setAttribute("errors", e.getErrors());
-            doGet(req, resp);
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 
+            req.setAttribute("errors", e.getErrors());
+            req.getRequestDispatcher("/ui/signUp").forward(req, resp);
         }
 
     }
