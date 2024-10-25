@@ -29,8 +29,8 @@ public class MessageService implements IMessageService {
 
         Validator.validateMessage(messageDTO, userService);
 
-        UserEntity fromUser = userService.getUser(messageDTO.getFrom());
-        UserEntity toUser = userService.getUser(messageDTO.getTo());
+        UserEntity fromUser = userService.getByLogin(messageDTO.getFrom());
+        UserEntity toUser = userService.getByLogin(messageDTO.getTo());
 
         messageStorage.create(MessageEntity.builder()
                 .setFromUser(fromUser)
