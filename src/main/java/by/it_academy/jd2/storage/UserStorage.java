@@ -37,10 +37,4 @@ public class UserStorage implements IUserStorage {
 
 
 
-    public boolean isExistLogin(String login) {
-        return hibernateManager.inTransaction(entityManager ->
-                entityManager.find(UserEntity.class, login) != null);
-    }
-
-
 }
