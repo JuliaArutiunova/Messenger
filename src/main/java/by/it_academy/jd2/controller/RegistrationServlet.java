@@ -18,7 +18,6 @@ import java.time.LocalDate;
 @WebServlet(name = "RegistrationServlet", urlPatterns = "/api/user")
 public class RegistrationServlet extends HttpServlet {
 
-    private static final String REGISTRATION_JSP_PATH = "/template/Registration.jsp";
     private static final String USER_NAME_PARAMETER = "userName";
     private static final String BIRTHDAY_PARAMETER = "bday";
     private static final String LOGIN_PARAMETER = "login";
@@ -27,11 +26,6 @@ public class RegistrationServlet extends HttpServlet {
 
     private final IUserService userService = ServiceFactory.getUserService();
 
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher(REGISTRATION_JSP_PATH).forward(req, resp);
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
