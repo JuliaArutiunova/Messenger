@@ -10,18 +10,15 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-    private final IUserService userService;
 public class Validator {
 
-    private final LocalDate minimumBirthDate = LocalDate.parse("1900-01-01");
+
+    private static final LocalDate minimumBirthDate = LocalDate.parse("1900-01-01");
 
 
-    public FormValidator(IUserService userService) {
-        this.userService = userService;
-    }
 
-    @Override
-    public List<Throwable> validateRegistration(RegistrationDTO registrationDTO) {
+
+    public static List<Throwable> validateRegistration(RegistrationDTO registrationDTO, IUserStorage userStorage) {
         List<Throwable> errors = new ArrayList<>();
 
         if (registrationDTO.getUserName().isBlank()) {
@@ -36,7 +33,7 @@ public class Validator {
 
         if (registrationDTO.getLogin().isBlank()) {
             errors.add(new IllegalArgumentException("Логин не введен"));
-        } else if (userService.isExist(registrationDTO.getLogin())) {
+        } else if (userStorage.getUser(registrationDTO.getLogin()) != null) {
             errors.add(new IllegalArgumentException("Такой логин уже существует, придумайте другой"));
         }
 
@@ -51,11 +48,13 @@ public class Validator {
         return errors;
     }
 
-    @Override
-    public void validateMessage(MessageDTO dto) {
-        if (dto.getTo().isBlank()) {
+
+    public static void validateMessage(MessageDTO dto, IUserService userService) {
+        if(userService.getByLogin(dto.getFrom()) == null){
+            throw new IllegalArgumentException("Отправителя не существует");
+        } else if (dto.getTo().isBlank()) {
             throw new IllegalArgumentException("Получатель не введен");
-        } else if (!userService.isExist(dto.getTo())) {
+        } else if (userService.getByLogin(dto.getTo()) == null) {
             throw new IllegalArgumentException("Получателя не существует");
         }
 
@@ -64,12 +63,19 @@ public class Validator {
         }
     }
 
-    @Override
-    public UserEntity validateUser(String login, String password) {
-        if (!userService.isExist(login)) {
+
+    public static UserEntity validateUser(String login, String password, IUserStorage userStorage) {
+        if (login.isBlank()) {
+            throw new IllegalArgumentException("Логин не введен");
+        } else if (userStorage.getUser(login) == null) {
             throw new IllegalArgumentException("Пользователя с таким логином не существует");
         }
-        UserEntity user = userService.getUser(login);
+
+        if (password.isBlank()) {
+            throw new IllegalArgumentException("Пароль не введен");
+        }
+
+        UserEntity user = userStorage.getUser(login);
 
         if (!user.getPassword().equals(password)) {
             throw new IllegalArgumentException("Неверный пароль");
