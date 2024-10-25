@@ -6,8 +6,7 @@ import by.it_academy.jd2.entity.MessageEntity;
 import by.it_academy.jd2.entity.UserEntity;
 import by.it_academy.jd2.service.api.IMessageService;
 import by.it_academy.jd2.service.api.IUserService;
-import by.it_academy.jd2.service.validation.FormValidator;
-import by.it_academy.jd2.service.validation.api.IFormValidator;
+import by.it_academy.jd2.service.util.Validator;
 import by.it_academy.jd2.storage.api.IMessageStorage;
 
 import java.util.ArrayList;
@@ -17,19 +16,18 @@ public class MessageService implements IMessageService {
 
     private IMessageStorage messageStorage;
     private IUserService userService;
-    private IFormValidator formValidator;
+
 
     public MessageService(IMessageStorage messageStorage,
                           IUserService userService) {
         this.messageStorage = messageStorage;
         this.userService = userService;
-        this.formValidator = new FormValidator(userService);
     }
 
     @Override
     public void create(MessageDTO messageDTO) {
 
-        formValidator.validateMessage(messageDTO);
+        Validator.validateMessage(messageDTO, userService);
 
         UserEntity fromUser = userService.getUser(messageDTO.getFrom());
         UserEntity toUser = userService.getUser(messageDTO.getTo());
