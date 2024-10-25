@@ -18,7 +18,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 @WebServlet(name = "MessageServlet", urlPatterns = "/api/message")
 public class MessageServlet extends HttpServlet {
-    public static final String MESSAGE_JSP = "/template/writeMessage.jsp";
     private static final String TO_PARAMETER = "to";
     private static final String TEXT_PARAMETER = "text";
 
@@ -33,13 +32,11 @@ public class MessageServlet extends HttpServlet {
 
         List<ShowMessageDTO> incomingMessages = messageService.getIncomingMessages(user.getLogin());
         req.setAttribute("userName", user.getName());
-        if (!incomingMessages.isEmpty()) {
-            req.setAttribute("formatter", formatter);
-            req.setAttribute("messages", incomingMessages);
 
-        }
+        req.setAttribute("formatter", formatter);
+        req.setAttribute("messages", incomingMessages);
 
-        req.getRequestDispatcher(MESSAGE_JSP).forward(req, resp);
+        req.getRequestDispatcher("/ui/message").forward(req, resp);
 
 
     }
