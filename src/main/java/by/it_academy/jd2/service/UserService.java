@@ -47,7 +47,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserDTO validateUser(String login, String password) {
+    public UserDTO getUserInfo(String login, String password) {
 
         UserEntity user = Validator.validateUser(login, password, userStorage);
 
@@ -60,7 +60,7 @@ public class UserService implements IUserService {
 
 
     @Override
-    public UserEntity getUser(String login) {
+    public UserEntity getByLogin(String login) {
         return userStorage.getUser(login);
     }
 

@@ -7,11 +7,10 @@ import by.it_academy.jd2.entity.UserEntity;
 public interface IUserService {
     void create(RegistrationDTO registrationDTO);
 
-    UserDTO validateUser(String login, String password);
-
+    UserDTO getUserInfo(String login, String password);
 
     long getUsersCount();
 
-    UserEntity getUser(String login);
+    UserEntity getByLogin(String login);
 
 }
