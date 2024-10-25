@@ -26,15 +26,22 @@ public class LogInServlet extends HttpServlet {
         String password = req.getParameter(PASSWORD_PARAMETER);
 
         try {
-            UserDTO user = userService.validateUser(login, password);
+            UserDTO user = userService.getUserInfo(login, password);
 
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
             resp.sendRedirect(req.getContextPath() + "/api/message");
 
         } catch (IllegalArgumentException e) {
-            req.setAttribute("error",e.getMessage());
-            doGet(req, resp);
+
+            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+
+            req.setAttribute("error", e.getMessage());
+            req.setAttribute("userLogin",login);
+
+            req.getRequestDispatcher("/ui/login").forward(req,resp);
+
+
         }
 
 
