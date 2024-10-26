@@ -2,7 +2,7 @@ package by.it_academy.jd2.controller;
 
 import by.it_academy.jd2.dto.MessageDTO;
 import by.it_academy.jd2.dto.ShowMessageDTO;
-import by.it_academy.jd2.dto.UserDTO;
+import by.it_academy.jd2.dto.UserInfoDTO;
 import by.it_academy.jd2.service.api.IMessageService;
 import by.it_academy.jd2.service.factory.ServiceFactory;
 import jakarta.servlet.ServletException;
@@ -28,7 +28,7 @@ public class MessageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        UserDTO user = (UserDTO) session.getAttribute("user");
+        UserInfoDTO user = (UserInfoDTO) session.getAttribute("user");
 
         List<ShowMessageDTO> incomingMessages = messageService.getIncomingMessages(user.getLogin());
         req.setAttribute("userName", user.getName());
@@ -45,7 +45,7 @@ public class MessageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
 
-        UserDTO user = (UserDTO) session.getAttribute("user");
+        UserInfoDTO user = (UserInfoDTO) session.getAttribute("user");
 
         String to = req.getParameter(TO_PARAMETER);
 

@@ -1,6 +1,6 @@
 package by.it_academy.jd2.controller.filter;
 
-import by.it_academy.jd2.dto.UserDTO;
+import by.it_academy.jd2.dto.UserInfoDTO;
 import by.it_academy.jd2.entity.UserRole;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
@@ -23,7 +23,7 @@ public class AdminSecurityFilter implements Filter {
         HttpSession session = req.getSession();
 
         if ((session != null) && (session.getAttribute("user") != null)) {
-            UserDTO user = (UserDTO) session.getAttribute("user");
+            UserInfoDTO user = (UserInfoDTO) session.getAttribute("user");
             if (user.getRole().equals(UserRole.ADMIN)) {
                 chain.doFilter(request, response);
             } else {

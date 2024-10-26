@@ -1,7 +1,7 @@
 package by.it_academy.jd2.controller;
 
 import by.it_academy.jd2.dto.RegistrationDTO;
-import by.it_academy.jd2.dto.UserDTO;
+import by.it_academy.jd2.dto.UserInfoDTO;
 import by.it_academy.jd2.exception.RegistrationException;
 import by.it_academy.jd2.service.api.IUserService;
 import by.it_academy.jd2.service.factory.ServiceFactory;
@@ -46,7 +46,7 @@ public class RegistrationServlet extends HttpServlet {
                     .birthDate(LocalDate.parse(birthDate))
                     .build());
 
-            UserDTO user = userService.getUserInfo(login, password);
+            UserInfoDTO user = userService.getUserInfo(login, password);
 
             HttpSession session = req.getSession();
             session.setAttribute("user", user);

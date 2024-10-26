@@ -2,7 +2,7 @@ package by.it_academy.jd2.service;
 
 
 import by.it_academy.jd2.dto.RegistrationDTO;
-import by.it_academy.jd2.dto.UserDTO;
+import by.it_academy.jd2.dto.UserInfoDTO;
 import by.it_academy.jd2.entity.UserEntity;
 import by.it_academy.jd2.entity.UserRole;
 import by.it_academy.jd2.exception.RegistrationException;
@@ -47,11 +47,11 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public UserDTO getUserInfo(String login, String password) {
+    public UserInfoDTO getUserInfo(String login, String password) {
 
         UserEntity user = Validator.validateUser(login, password, userStorage);
 
-        return UserDTO.builder()
+        return UserInfoDTO.builder()
                 .name(user.getName())
                 .login(user.getLogin())
                 .role(user.getRole())

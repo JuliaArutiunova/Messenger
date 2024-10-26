@@ -1,7 +1,7 @@
 package by.it_academy.jd2.controller;
 
 
-import by.it_academy.jd2.dto.UserDTO;
+import by.it_academy.jd2.dto.UserInfoDTO;
 import by.it_academy.jd2.service.api.IUserService;
 import by.it_academy.jd2.service.factory.ServiceFactory;
 import jakarta.servlet.ServletException;
@@ -26,7 +26,7 @@ public class LogInServlet extends HttpServlet {
         String password = req.getParameter(PASSWORD_PARAMETER);
 
         try {
-            UserDTO user = userService.getUserInfo(login, password);
+            UserInfoDTO user = userService.getUserInfo(login, password);
 
             HttpSession session = req.getSession();
             session.setAttribute("user", user);
