@@ -20,6 +20,8 @@
         <button type="submit">Отправить</button>
     </form>
 
+    <p style="color:Blue;">${message}</p>
+
     <c:if test="${not empty error}">
         <p style="color:Red;">${error}</p>
         <a href="${pageContext.request.contextPath}/ui/signUp"> Зарегистрироваться </a>
