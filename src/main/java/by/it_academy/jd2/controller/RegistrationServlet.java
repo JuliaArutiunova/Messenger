@@ -56,6 +56,11 @@ public class RegistrationServlet extends HttpServlet {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 
             req.setAttribute("errors", e.getErrors());
+
+            req.setAttribute("userName", userName);
+            req.setAttribute("birthDate", birthDate);
+            req.setAttribute("login", login);
+
             req.getRequestDispatcher("/ui/signUp").forward(req, resp);
         }
 

@@ -12,15 +12,15 @@
 
         <form action="${pageContext.request.contextPath}/api/user", method="POST">
             Имя:<br>
-                <input type="text" name="userName" required>
+                <input type="text" name="userName" value="${userName}" required>
                 <br>
                 <br>
             Дата рождения:<br>
-                <input type="date" name="bday" required>
+                <input type="date" name="bday" value="${birthDate}" required>
                 <br>
                 <br>
             Логин:<br>
-                <input type="text" name="login" required>
+                <input type="text" name="login" value="${login}" required>
                 <br>
                 <br>
             Пароль:<br>
