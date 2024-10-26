@@ -1,7 +1,7 @@
 package by.it_academy.jd2.service;
 
 import by.it_academy.jd2.dto.MessageDTO;
-import by.it_academy.jd2.dto.ShowMessageDTO;
+import by.it_academy.jd2.dto.MessageInfoDTO;
 import by.it_academy.jd2.entity.MessageEntity;
 import by.it_academy.jd2.entity.UserEntity;
 import by.it_academy.jd2.service.api.IMessageService;
@@ -42,11 +42,11 @@ public class MessageService implements IMessageService {
     }
 
     @Override
-    public List<ShowMessageDTO> getIncomingMessages(String user) {
-        List<ShowMessageDTO> messageDTOS = new ArrayList<>();
+    public List<MessageInfoDTO> getIncomingMessages(String user) {
+        List<MessageInfoDTO> messageDTOS = new ArrayList<>();
         messageStorage.getMessagesToUser(user)
                 .forEach(messageEntity -> messageDTOS.add(
-                        ShowMessageDTO.builder()
+                        MessageInfoDTO.builder()
                                 .name(messageEntity.getFromUser().getName())
                                 .text(messageEntity.getText())
                                 .time(messageEntity.getSendingTime())

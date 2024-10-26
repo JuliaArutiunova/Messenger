@@ -1,7 +1,7 @@
 package by.it_academy.jd2.controller;
 
 import by.it_academy.jd2.dto.MessageDTO;
-import by.it_academy.jd2.dto.ShowMessageDTO;
+import by.it_academy.jd2.dto.MessageInfoDTO;
 import by.it_academy.jd2.dto.UserInfoDTO;
 import by.it_academy.jd2.service.api.IMessageService;
 import by.it_academy.jd2.service.factory.ServiceFactory;
@@ -30,7 +30,7 @@ public class MessageServlet extends HttpServlet {
         HttpSession session = req.getSession();
         UserInfoDTO user = (UserInfoDTO) session.getAttribute("user");
 
-        List<ShowMessageDTO> incomingMessages = messageService.getIncomingMessages(user.getLogin());
+        List<MessageInfoDTO> incomingMessages = messageService.getIncomingMessages(user.getLogin());
         req.setAttribute("userName", user.getName());
 
         req.setAttribute("formatter", formatter);
