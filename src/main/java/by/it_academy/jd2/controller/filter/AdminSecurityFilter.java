@@ -11,15 +11,14 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-
 @WebFilter(filterName = "AdminSecurityFilter", urlPatterns = {"/ui/admin/*", "/api/admin/*"})
 public class AdminSecurityFilter implements Filter {
     @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
 
-        String contextPath = req.getContextPath();
         HttpSession session = req.getSession();
 
         if ((session != null) && (session.getAttribute("user") != null)) {
@@ -27,9 +26,20 @@ public class AdminSecurityFilter implements Filter {
             if (user.getRole().equals(UserRole.ADMIN)) {
                 chain.doFilter(request, response);
             } else {
-                resp.sendRedirect(contextPath + "/ui/login");
+                redirect(req, resp);
             }
+        } else {
+            redirect(req, resp);
         }
 
-        }
+    }
+
+    public void redirect(HttpServletRequest req, HttpServletResponse resp)
+            throws IOException, ServletException {
+        resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        req.setAttribute("message",
+                "Для получения доступа к статистике приложения небходимо войти как администратор");
+        req.getRequestDispatcher("/ui/login").forward(req, resp);
+    }
+
 }
