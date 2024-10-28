@@ -26,22 +26,6 @@ public class MessageStorage implements IMessageStorage {
 
     }
 
-    @Override
-    public List<MessageEntity> getMessagesFromUser(String from) {
-
-     return hibernateManager.inTransaction(entityManager -> {
-            List<MessageEntity> messages;
-
-            CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-            CriteriaQuery<MessageEntity> criteriaQuery = criteriaBuilder.createQuery(MessageEntity.class);
-            Root<MessageEntity> root = criteriaQuery.from(MessageEntity.class);
-            criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("fromUser"), from));
-
-            messages = entityManager.createQuery(criteriaQuery).getResultList();
-            return messages;
-        });
-
-    }
 
     @Override
     public List<MessageEntity> getMessagesToUser(String login) {
