@@ -9,7 +9,7 @@ public interface IMessageStorage {
 
     List<MessageEntity> getMessagesFromUser(String from);
 
-    List<MessageEntity> getMessagesToUser(String to);
+    List<MessageEntity> getMessagesToUser(String login);
 
     long getMessageCount();
 
