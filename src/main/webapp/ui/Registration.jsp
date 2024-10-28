@@ -27,7 +27,7 @@
                 <input type="password" name="psw" required>
                 <br>
                 <br>
-            Подтвердите пароля:<br>
+            Подтвердите пароль:<br>
                 <input type="password" name="confirmPsw" required>
                 <br>
                 <br>
