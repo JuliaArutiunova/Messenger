@@ -38,7 +38,7 @@ public class AdminSecurityFilter implements Filter {
             throws IOException, ServletException {
         resp.setStatus(HttpServletResponse.SC_FORBIDDEN);
         req.setAttribute("message",
-                "Для получения доступа к статистике приложения небходимо войти как администратор");
+                "Для получения доступа к этой странице небходимо войти как администратор");
         req.getRequestDispatcher("/ui/login").forward(req, resp);
     }
 
