@@ -22,11 +22,11 @@ public class MessageEntity {
     @Column(name = "sending_time")
     private LocalDateTime sendingTime;
 
-    @ManyToOne//(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "from_user", foreignKey = @ForeignKey(name = "from_user_FK"))
     private UserEntity fromUser;
 
-    @ManyToOne//(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "to_user", foreignKey = @ForeignKey(name = "to_user_FK"))
     private UserEntity toUser;
 
