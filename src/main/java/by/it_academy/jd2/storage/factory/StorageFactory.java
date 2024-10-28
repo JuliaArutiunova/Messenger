@@ -18,11 +18,11 @@ public class StorageFactory {
     private StorageFactory() {
     }
 
-    public static IUserStorage getUserStorageSQL() {
+    public static IUserStorage getUserStorage() {
         return userStorage;
     }
 
-    public static IMessageStorage getMessageStorageSQL() {
+    public static IMessageStorage getMessageStorage() {
         return messageStorage;
     }
 

@@ -10,10 +10,10 @@ public class ServiceFactory {
 
 
     private static final IUserService userService = new UserService(
-            StorageFactory.getUserStorageSQL());
+            StorageFactory.getUserStorage());
 
     private static final IMessageService messageService = new MessageService(
-            StorageFactory.getMessageStorageSQL(), userService);
+            StorageFactory.getMessageStorage(), userService);
 
 
     private ServiceFactory() {
