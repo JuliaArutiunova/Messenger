@@ -3,6 +3,7 @@ package by.it_academy.jd2.service;
 
 import by.it_academy.jd2.dto.RegistrationDTO;
 import by.it_academy.jd2.dto.UserInfoDTO;
+import by.it_academy.jd2.dto.UserNameDTO;
 import by.it_academy.jd2.entity.UserEntity;
 import by.it_academy.jd2.entity.UserRole;
 import by.it_academy.jd2.exception.RegistrationException;
@@ -12,6 +13,8 @@ import by.it_academy.jd2.storage.api.IUserStorage;
 
 
 import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class UserService implements IUserService {
@@ -65,9 +68,19 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public List<UserNameDTO> getUserNames() {
+        List<UserNameDTO> users = userStorage.getUserNames();
+        users.sort(Comparator.comparing(UserNameDTO::getName, String.CASE_INSENSITIVE_ORDER));
+        return users;
+    }
+
+    @Override
     public long getUsersCount() {
         return userStorage.getUsersCount();
     }
+
+
+
 
 
 }
