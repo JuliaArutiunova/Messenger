@@ -3,7 +3,9 @@ package by.it_academy.jd2.controller;
 import by.it_academy.jd2.dto.MessageDTO;
 import by.it_academy.jd2.dto.MessageInfoDTO;
 import by.it_academy.jd2.dto.UserInfoDTO;
+import by.it_academy.jd2.dto.UserNameDTO;
 import by.it_academy.jd2.service.api.IMessageService;
+import by.it_academy.jd2.service.api.IUserService;
 import by.it_academy.jd2.service.factory.ServiceFactory;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -21,7 +23,10 @@ public class MessageServlet extends HttpServlet {
     private static final String TO_PARAMETER = "to";
     private static final String TEXT_PARAMETER = "text";
 
-    public final IMessageService messageService = ServiceFactory.getMessageService();
+    private final IMessageService messageService = ServiceFactory.getMessageService();
+
+    private final IUserService userService = ServiceFactory.getUserService();
+
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy,  HH:mm");
 
 
@@ -29,6 +34,9 @@ public class MessageServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         UserInfoDTO user = (UserInfoDTO) session.getAttribute("user");
+
+        List<UserNameDTO> userList = userService.getUserNames();
+        req.setAttribute("userList", userList);
 
         List<MessageInfoDTO> incomingMessages = messageService.getIncomingMessages(user.getLogin());
         req.setAttribute("userName", user.getName());
@@ -56,7 +64,7 @@ public class MessageServlet extends HttpServlet {
                     .text(req.getParameter(TEXT_PARAMETER))
                     .time(LocalDateTime.now())
                     .build());
-            req.setAttribute("report", "Сообщение для " + to + " успешно отправлено");
+            req.setAttribute("report", "Сообщение успешно отправлено");
             doGet(req, resp);
         } catch (IllegalArgumentException e) {
             resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
