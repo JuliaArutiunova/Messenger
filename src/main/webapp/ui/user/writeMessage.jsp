@@ -25,7 +25,11 @@
 
     <form action="${pageContext.request.contextPath}/api/message", method="POST">
         Кому:<br>
-            <input type="text" name="to" required>
+            <select name="to" required>
+                    <c:forEach items="${userList}" var="user">
+                        <option value="${user.login}">${user.name}</option>
+                    </c:forEach>
+                </select>
             <br>
         Сообщение :<br>
             <textarea name="text" id="txtpole" cols="70" rows="5" required> </textarea><br>
